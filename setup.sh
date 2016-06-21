@@ -31,9 +31,9 @@ BRAWAND_PRIMATE_TREE=$MISC_DIR/brawand-et-al-primate-tree.tre
 
 # Download human GO terms, then process into a simple adjacency list format
 cd $HUMAN_GO_DIR
-# wget http://geneontology.org/gene-associations/gene_association.goa_human.gz
-# gunzip gene_association.goa_human.gz
-# python parseGO.py -i gene_association.goa_human -o human-go-terms.txt
+wget http://geneontology.org/gene-associations/gene_association.goa_human.gz
+gunzip gene_association.goa_human.gz
+python parseGO.py -i gene_association.goa_human -o human-go-terms.txt
 
 # Download the data from the Brawand, et al. paper and preprocess it
 BRAWAND_DIR=$PRIMATE_EXPRESSION_DIR/brawand-et-al
@@ -41,23 +41,19 @@ BRAWAND_MATRICES_DIR=$BRAWAND_DIR/matrices
 mkdir -p $BRAWAND_MATRICES_DIR
 cd $BRAWAND_DIR
 
-# wget http://www.nature.com/nature/journal/v478/n7369/extref/nature10532-s4.zip
-# unzip nature10532-s4.zip
-# rm -r nature10532-s4.zip __MACOSX
+wget http://www.nature.com/nature/journal/v478/n7369/extref/nature10532-s4.zip
+unzip nature10532-s4.zip
+rm -r nature10532-s4.zip __MACOSX
 
 BRAWAND_EXPR=$BRAWAND_DIR/Supplementary_Data1/NormalizedRPKM_ConstitutiveExons_Primate1to1Orthologues.txt
-# for organ in br kd ht lv
-# do
-# 	python logFoldChanges.py -i $BRAWAND_EXPR --organ ${organ} --gender M \
-# 		-gcf $HUMAN_ENSEMBL_SYMBOL_MAP -o matrices/primate-male-${organ}.tsv
-# done
-#
-# for organ in br kd ht cb
-# do
-# 	python logFoldChanges.py -i $BRAWAND_EXPR  --organ ${organ} --gender F \
-# 		-gcf $HUMAN_ENSEMBL_SYMBOL_MAP -o matrices/primate-female-${organ}.tsv
-# done
+for organ in br kd ht lv
+do
+	python logFoldChanges.py -i $BRAWAND_EXPR --organ ${organ} --gender M \
+		-gcf $HUMAN_ENSEMBL_SYMBOL_MAP -o matrices/primate-male-${organ}.tsv
+done
 
-################################################################################
-# RUN ANALYSIS
-################################################################################
+for organ in br kd ht cb
+do
+	python logFoldChanges.py -i $BRAWAND_EXPR  --organ ${organ} --gender F \
+		-gcf $HUMAN_ENSEMBL_SYMBOL_MAP -o matrices/primate-female-${organ}.tsv
+done
