@@ -11,7 +11,6 @@ PROJECT_DIR=`pwd`
 
 OUTPUT_DIR=$PROJECT_DIR/output
 mkdir -p $OUTPUT_DIR/primate-female-{br,cb,ht,kd} $OUTPUT_DIR/primate-male-{br,ht,kd,lv}
-exit
 DATA_DIR=$PROJECT_DIR/data
 MISC_DIR=$DATA_DIR/misc
 GO_DIR=$DATA_DIR/go
