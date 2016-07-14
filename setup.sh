@@ -14,7 +14,7 @@ mkdir -p $OUTPUT_DIR/primate-female-{br,cb,ht,kd} $OUTPUT_DIR/primate-male-{br,h
 
 DATA_DIR=$PROJECT_DIR/data
 MISC_DIR=$DATA_DIR/misc
-GO_DIR=$DATA_DIR/go
+GO_DIR=$DATA_DIR/go 
 HUMAN_GO_DIR=$GO_DIR/human
 EXPRESSION_DIR=$DATA_DIR/expression
 PRIMATE_EXPRESSION_DIR=$EXPRESSION_DIR/primate
@@ -31,6 +31,7 @@ BRAWAND_PRIMATE_TREE=$MISC_DIR/brawand-et-al-primate-tree.tre
 
 # Download human GO terms, then process into a simple adjacency list format
 cd $HUMAN_GO_DIR
+echo $PWD
 wget http://geneontology.org/gene-associations/gene_association.goa_human.gz
 gunzip gene_association.goa_human.gz
 python parseGO.py -i gene_association.goa_human -o human-go-terms.txt
