@@ -20,4 +20,3 @@ for (name in c("female-br", "female-cb", "female-ht", "female-kd", "male-br", "m
 }	
 
 #figure out models
-#filter out OU and equal rate shifts regardless

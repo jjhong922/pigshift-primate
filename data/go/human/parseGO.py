@@ -20,4 +20,4 @@ with open(args.input_file) as f:
 
 # Output in a friendlier format
 with open(args.output_file, 'w') as out:
-    out.write( '\n'.join([ '{}\t{}'.format(n, '\t'.join(sorted(genes))) for n, genes in goTerms.iteritems() ]) )
+    out.write( '\n'.join([ '{0}\t{1}'.format(n, '\t'.join(sorted(genes))) for n, genes in goTerms.iteritems() ]) )

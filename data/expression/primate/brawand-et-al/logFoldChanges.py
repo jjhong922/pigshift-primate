@@ -53,6 +53,6 @@ with open(args.input_file) as f:
 A = A[:, nonNullCols]
 print '{} genes in {} species'.format(len(colNames), len(rowNames))
 with open(args.output_file, 'w') as out:
-	output = [ '{}\t{}'.format(label, '\t'.join(map(str, A[i, :]))) for i, label in enumerate(rowLabels) ]
+	output = [ '{0}\t{1}'.format(label, '\t'.join(map(str, A[i, :]))) for i, label in enumerate(rowLabels) ]
 	out.write('\t' + '\t'.join(colNames) + '\n')
 	out.write('\n'.join(output))
