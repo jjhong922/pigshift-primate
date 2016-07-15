@@ -51,7 +51,7 @@ with open(args.input_file) as f:
 
 # Write to file
 A = A[:, nonNullCols]
-print '{} genes in {} species'.format(len(colNames), len(rowNames))
+print '{0} genes in {1} species'.format(len(colNames), len(rowNames))
 with open(args.output_file, 'w') as out:
 	output = [ '{0}\t{1}'.format(label, '\t'.join(map(str, A[i, :]))) for i, label in enumerate(rowLabels) ]
 	out.write('\t' + '\t'.join(colNames) + '\n')
