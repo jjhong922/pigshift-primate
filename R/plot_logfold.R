@@ -9,7 +9,7 @@ for (name in c("female-br", "female-cb", "female-ht", "female-kd", "male-br", "m
 	maxfile <- read.table(sprintf("../output/primate-%s/waic_max-%s.tsv", name, name), sep = "\t", header = TRUE)
 	siggroups <- list()
 	for (i in 1:nrow(maxfile)) {
-		if (maxfile[i,]$max >= .98 && maxfile[i,]$maxcol != 0 && maxfile[i,]$maxcol != 1) {
+		if (maxfile[i,]$max >= .98 && maxfile[i,]$maxcol != 9 && maxfile[i,]$maxcol != 1) {
 			siggroups <- c(siggroups, row.names(maxfile[i,]))
 		}
 	}
