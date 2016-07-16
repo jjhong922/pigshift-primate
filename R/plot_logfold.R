@@ -1,9 +1,10 @@
 library(PIGShift, ape)
 
 groups <- read.groups("/Users/jhong/Documents/Berkeley/Research/pigshift-primate/data/go/human/human-go-terms.txt")
+primate.tree = read.tree("/Users/jhong/Documents/Berkeley/Research/pigshift-primate/data/misc/brawand-et-al-primate-tree.tre");
 
 for (name in c("female-br", "female-cb", "female-ht", "female-kd", "male-br", "male-ht", "male-kd", "male-lv")) {
-	data <- read.table(sprintf("/Users/jhong/Documents/Berkeley/Research/pigshift-primate/data/expression/primate/brawand-et-al/matrices/primate-%s.tsv", name))
+	data <- read.exp(sprintf("/Users/jhong/Documents/Berkeley/Research/pigshift-primate/data/expression/primate/brawand-et-al/matrices/primate-%s.tsv", name), primate.tree)
 	maxfile <- read.table(sprintf("/Users/jhong/Documents/Berkeley/Research/pigshift-primate/output/primate-%s/waic_max-%s.tsv", name, name), sep="\t", header=TRUE)
 	siggroups <- list()
 	for (i in 1:nrow(maxfile)) {
@@ -20,4 +21,3 @@ for (name in c("female-br", "female-cb", "female-ht", "female-kd", "male-br", "m
 }	
 
 #figure out models
-#filter out OU and equal rate shifts regardless

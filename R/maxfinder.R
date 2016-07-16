@@ -8,8 +8,7 @@ which.model <- function(colindex) {
 }
 
 for (name in c("female-br", "female-cb", "female-ht", "female-kd", "male-br", "male-ht", "male-kd", "male-lv")) {
-    file <- read.table(sprintf("/Users/jhong/Documents/Berkeley/Research/pigshift-primate/output/primate-%s/waic.tsv", name), sep=" ", header=TRUE)
-    data <- read.table(sprintf("/Users/jhong/Documents/Berkeley/Research/pigshift-primate/data/expression/primate/brawand-et-al/matrices/primate-%s.tsv", name))
+    file <- read.table(sprintf("/Users/jhong/Documents/Berkeley/Research/pigshift-primate/output/primate-%s/waic.tsv", name), sep="\t", header=TRUE)
     file$max <- apply(file, 1, max)
     file$maxcol <- apply(file, 1, which.max)
     file$model <- lapply(file$maxcol, which.model)
