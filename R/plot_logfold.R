@@ -17,7 +17,8 @@ for (name in c("female-br", "female-cb", "female-ht", "female-kd", "male-br", "m
 	for (group in siggroups) {
 		pdf(sprintf("../plots/primate-%s/%s_plot.pdf", name, group))
 		print(group)
-		plot_logfoldchange(data, groups, group_name = group, main = sprintf("%s(V%s)", group, maxfile[group,]$maxcol))
+		print(maxfile[group,]$maxcol)
+		plot_logfoldchange(data, groups, group_name = group, main = sprintf("%s(V%s)-%s", group, maxfile[group,]$maxcol, name))
 		dev.off()
 	}
 }	
