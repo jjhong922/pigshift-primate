@@ -8,7 +8,7 @@ organlist <- c("female-br", "female-cb", "female-ht", "female-kd", "male-br", "m
 data <- list()
 for (i in 1:length(organlist)) {
 	data[[i]] <- read.exp(sprintf("../data/expression/primate/brawand-et-al/matrices/primate-%s.tsv", 
-		sigterms[i,]$organ), primate.tree)
+		organlist[[i]]), primate.tree)
 	print(i)
 }
 
