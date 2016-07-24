@@ -34,14 +34,12 @@ for (name in c("female-br", "female-cb", "female-ht", "female-kd", "male-br", "m
 			curdat <- stack(curdat)
 			ggplot(curdat[curdat$ind != "human",], aes(x = values)) + 
 				geom_density(aes(group = ind, colour = ind)) + 
-				coord_cartesian(xlim = c(-20, 20)) +
 				ggtitle(sprintf("%s(%s)-%s", group, maxfile[group,]$maxcol, name)) +
 				theme_minimal()
 
-			ggsave(sprintf("../plots/primate-%s/%s_plot.pdf", name, group))
+			ggsave(sprintf("../plots/primate-%s/%s_plot_full.pdf", name, group))
 			print(group)
 		}
 	}
 }	
 print("Script complete.")
-
