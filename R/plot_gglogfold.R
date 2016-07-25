@@ -5,15 +5,21 @@ library(ggplot2)
 groups <- read.groups("../data/go/human/human-go-terms.txt")
 primate.tree <- read.tree("../data/misc/brawand-et-al-primate-tree.tre")
 
+#x[!x %in% boxplot.stats(x)$out]
+# dmean <- function(x, th) {
+# 	den <- density(x, kernel = c("gaussian"))
+# 	abs(mean(den$x[!den$x %in% boxplot.stats(den$x)$out])) > th
+# }
+
 #from stackoverflow- finds dominant mode of a density plot
 dmode <- function(x, th) {
-    den <- density(x, kernel=c("gaussian"))
-    (abs(den$x[den$y == max(den$y)]) > th)   
+    den <- density(x, kernel = c("gaussian"))
+    abs(den$x[den$y == max(den$y)]) > th  
 }  
 
 dmodey <- function(x, th) {
 	den <- density(x, kernel = c("gaussian"))
-	(max(den$y) > th)
+	max(den$y) > th
 }
 
 for (name in c("female-br", "female-cb", "female-ht", "female-kd", "male-br", "male-ht", "male-kd", "male-lv")) {
@@ -29,12 +35,13 @@ for (name in c("female-br", "female-cb", "female-ht", "female-kd", "male-br", "m
 
 	for (group in siggroups) {
 		curdat <- data.frame(t(data[,which(colnames(data)%in%groups[[group]])]))
-		if (any(unlist(sapply(curdat, function(x){dmode(x, 3)}))) && 
+		if (any(unlist(sapply(curdat[-1], function(x){dmode(x, 3)}))) && 
 		  any(sapply(curdat[,-1], function(x){dmodey(x, 0.05)}))){
 			curdat <- stack(curdat)
 			ggplot(curdat[curdat$ind != "human",], aes(x = values)) + 
 				geom_density(aes(group = ind, colour = ind)) + 
-				coord_cartesian(xlim = c(-20, 20)) +
+				# coord_cartesian(xlim = c(-20, 20)) +
+				scale_x_continuous(limits = c(-20,20)) +
 				ggtitle(sprintf("%s(%s)-%s", group, maxfile[group,]$maxcol, name)) +
 				theme_minimal()
 

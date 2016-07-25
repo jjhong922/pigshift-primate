@@ -11,7 +11,7 @@ data <- list()
 for (i in 1:length(organlist)) {
 	data[[i]] <- read.exp(sprintf("../data/expression/primate/brawand-et-al/matrices/primate-%s.tsv", 
 		organlist[[i]]), primate.tree)
-	print(i)
+	print(sprintf("%s matrix read.", organlist[[i]]))
 }
 
 for (i in 1:nrow(sigterms)) {
@@ -22,9 +22,10 @@ for (i in 1:nrow(sigterms)) {
 	print(as.character(sigterms[i,]$GO_terms))
 	
 	ggplot(curdat[curdat$ind != "human",], aes(x=values)) + 
-		geom_density(aes(group = ind, colour = ind, fill = ind), alpha = 0.3) + 
+		geom_density(aes(group = ind, colour = ind)) + 
 		scale_x_continuous(limits = c(-20, 20)) +
 		ggtitle(sprintf("%s(%s)-%s", sigterms[i,]$GO_terms, sigterms[i,]$model, sigterms[i,]$organ)) +
+		labs(x = "log fold change", colour = "Species Legend") +
 		theme_minimal()
 
 	ggsave(sprintf("../plots/sig_ggplots/%s-%s_plot.png", sigterms[i,]$organ, sigterms[i,]$GO_terms))
