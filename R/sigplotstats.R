@@ -9,7 +9,7 @@ dmode <- function(x) {
 
 groups <- read.groups("../data/go/human/human-go-terms.txt")
 primate.tree <- read.tree("../data/misc/brawand-et-al-primate-tree.tre")
-sigterms <- read.table("../sigGOterms.tsv", sep = "\t")
+sigterms <- read.table("../sigGOterms.tsv", sep = "\t", stringsAsFactors = FALSE)
 
 organlist <- c("female-br", "female-cb", "female-ht", "female-kd", "male-br", "male-ht", "male-kd", "male-lv")
 data <- list()
@@ -26,10 +26,10 @@ stats <- data.frame(group = character(nrow(sigterms)), chimp_mode = numeric(nrow
 	stringsAsFactors = FALSE)
 
 for (i in 1:nrow(sigterms)) {
-	curdat <- data[[which(organlist == as.character(sigterms[i,]$organ))]]
-	curdat <- data.frame(t(curdat[,which(colnames(curdat)%in%groups[[as.character(sigterms[i,]$GO_terms)]])]))
-	print(as.character(sigterms[i,]$GO_terms))
-	stats[i,1] <- as.character(sigterms[i,]$GO_terms)
+	curdat <- data[[which(organlist == sigterms[i,]$organ)]]
+	curdat <- data.frame(t(curdat[,which(colnames(curdat)%in%groups[[sigterms[i,]$GO_terms]])]))
+	print(sigterms[i,]$GO_terms)
+	stats[i,1] <- sigterms[i,]$GO_terms
 	for (j in 2:ncol(curdat)) {
 		stats[i,2*j-2] <- dmode(curdat[,j])
 		stats[i,2*j-1] <- mean(curdat[,j])
