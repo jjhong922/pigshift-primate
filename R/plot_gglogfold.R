@@ -14,7 +14,7 @@ primate.tree <- read.tree("../data/misc/brawand-et-al-primate-tree.tre")
 #from stackoverflow- finds dominant mode of a density plot
 dmode <- function(x, th) {
     den <- density(x, kernel = c("gaussian"))
-    abs(den$x[den$y == max(den$y)]) > th  
+    abs(den$x[which.max(den$y)]) > th  
 }  
 
 dmodey <- function(x, th) {
